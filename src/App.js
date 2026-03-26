@@ -9,7 +9,7 @@ import Register from "./Register/Register";
 import Network from "./Network/Network";
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
-import Forgot_Password from "./Forgot_Password/Forgot_Password";
+import ForgotPassword from "./Forgot_Password/ForgotPassword";
 import MoviesDetails from "./MoviesDetails/MoviesDetails";
 
 function App() {
@@ -85,7 +85,7 @@ function App() {
             <Route path=":id" element={<MoviesDetails />} />
           </Route>
 
-          <Route path="/forgetpassword" element={<Forgot_Password />} />
+          <Route path="/forgetpassword" element={<ForgotPassword />} />
 
           <Route path="*" element={<h2>Not Found</h2>} />
         </Routes>

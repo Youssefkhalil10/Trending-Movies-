@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function Forgot_Password() {
+export default function ForgotPassword() {
   return (
     <>
       <h2 className="my-3">Reset Password </h2>

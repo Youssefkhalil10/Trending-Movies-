@@ -23,6 +23,8 @@ export default function Home() {
     getMovies();
   }, []);
 
+  console.log(error);
+
   return (
     <>
       <div className="container mt-5">
