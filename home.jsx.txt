@@ -1,0 +1,106 @@
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css"; // استيراد Bootstrap
+
+export default function Home() {
+  const [movies, setMovies] = useState([]); // تخزين بيانات الأفلام
+  const [loading, setLoading] = useState(true); // حالة التحميل
+
+  // دالة لجلب البيانات
+  const getMovies = async () => {
+    try {
+      const response = await axios.get(
+        "https://raw.githubusercontent.com/toedter/movies-demo/master/backend/src/main/resources/static/movie-data/movies-250.json"
+      );
+
+      setMovies(response.data.movies); // تخزين البيانات في الـ state
+      setLoading(false); // إنهاء حالة التحميل
+    } catch (error) {
+      console.error("Error fetching movies:", error);
+      setLoading(false);
+    }
+  };
+
+  // تحميل البيانات عند فتح الصفحة
+  useEffect(() => {
+    getMovies();
+  }, []);
+
+  return (
+    <div className="container mt-4">
+      <h2 className="text-center mb-4">Top 250 Movies</h2>
+      {loading ? (
+        <div className="text-center">
+          <div className="spinner-border text-primary" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      ) : (
+        <div className="d-flex flex-row flex-wrap justify-content-center gap-3">
+          {movies.map((movie) => (
+            <div key={movie.id} className="card" style={{ width: "200px" }}>
+              <img
+                src={movie.Poster} // الصورة الخاصة بالفيلم
+                alt={movie.title}
+                className="card-img-top"
+                style={{ height: "300px", objectFit: "cover" }}
+              />
+              <div className="card-body text-center">
+                <h5 className="card-title">{movie.title}</h5>
+                <p className="card-text text-muted">{movie.year}</p>
+                <p className="card-text text-warning">⭐ {movie.imdbRating}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+
+ده الكود القديم في api 
+ده كان في ملف register.jsx
+submitregister()
+else{
+      let {data} =await axios.post(`https://67c38e281851890165af5153.mockapi.io/api/login/users`,user)
+      console.log(data);
+      navigate('/Login')
+      // الحاله دي مش شغاله عشان  اللي انت عاملها مش حقيقيه والداتا مش 
+      // موجوده فيها  api 
+      if(data.message==='success')
+      {
+        setIsLoading(false);
+
+        //Navigate to Login
+        console.log('Data success');
+      }
+      else{
+        setIsLoading(false);
+        setError(data.message);
+      }
+
+    }
+
+نفس التعديل تم بس في ملف login
+submitlogin()
+
+else{
+      let {data} =await axios.post(`https://67c38e281851890165af5153.mockapi.io/api/login`,user)
+      console.log(data);
+      setIsLoading(false);
+      localStorage.setItem('userToken',data.token);
+      navigate('/home')
+      
+      if(data.message==='success')
+      {
+        //Navigate to Login
+        console.log(data);
+        
+      }
+      else{
+        setIsLoading(false);
+        setError(data.message);
+      }
+
+    }
